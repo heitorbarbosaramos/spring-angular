@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand mb-0 h1" href="#">Tarefa App</a>
+</nav>
+
+<div class="container mt-4">
+    <h4>Tarefas</h4>
+    <hr />
+    <form class="form-inline" autocomplete="off" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputTarefa">Tarefa</label>
+                    <input type="text" id="inputTarefa" class="form-control" required formControlName="descricao">
+                    <small id="tarefaHelp" class="form-text text-muted">Aqui você pode adcionar suas tarefas.</small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary top">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
