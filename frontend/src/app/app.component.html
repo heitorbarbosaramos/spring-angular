@@ -12,7 +12,8 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="novaTarefa">Tarefa</label>
-          <input type="text" class="form-control" id="novaTarefa" placeholder="Título da tarefa" formControlName="descricao">
+          <input type="text" class="form-control" id="novaTarefa" placeholder="Título da tarefa"
+            formControlName="descricao">
         </div>
       </div>
 
@@ -23,18 +24,23 @@
       <div class="col-md-4 top">
         <label for="novaTarefa">Lista de tarefa</label>
         <ul class="list-group">
-          <li *ngFor="let tarefa of listTarefa" class="list-group-item d-flex justify-content-between align-items-center">
-            {{tarefa.descricao}}  {{tarefa.tarefaCriada}}
-            
-            
-            <div class="btn-group" role="group" aria-label="Exemplo básico">
-              <button type="button" class="btn btn-primary"><img class="icon" src="./assets/icons/done.svg" title="Finalizar"/></button>
-              <button type="button" class="btn btn-danger"><img class="icon" src="./assets/icons/delete.svg" title="Excluir"/></button>
+          <li *ngFor="let tarefa of listTarefa"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            {{tarefa.descricao}} {{tarefa.tarefaCriada}}
+
+            <div *ngIf="tarefa.id">
+
+              <div class="btn-group" role="group" aria-label="Exemplo básico">
+                <button type="button" class="btn btn-primary"><img class="icon" src="./assets/icons/done.svg"
+                    title="Finalizar" /></button>
+                <button type="button" class="btn btn-danger"><img class="icon" src="./assets/icons/delete.svg"
+                    title="Excluir" /></button>
+              </div>
+
             </div>
 
-         
           </li>
-          
+
         </ul>
       </div>
 
