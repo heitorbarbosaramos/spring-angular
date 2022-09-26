@@ -19,6 +19,8 @@ export class AppComponent {
   salvar(){
     console.log(this.form.value)
     const tarefa : Tarefa = {...this.form.value };
-    this.service.salvar(tarefa).subscribe();
+    this.service.salvar(tarefa).subscribe(
+      this.form.reset
+    );
   }
 }
