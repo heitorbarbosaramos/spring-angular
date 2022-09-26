@@ -5,14 +5,14 @@
 <div class="container">
   <h3 class="mt-5">Tarefas</h3>
   <hr />
-  <form>
+  <form [formGroup]="form" (ngSubmit)="salvar()">
     <div class="row">
 
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="novaTarefa">Tarefa</label>
-          <input type="text" class="form-control" id="novaTarefa" placeholder="Título da tarefa">
+          <input type="text" class="form-control" id="novaTarefa" placeholder="Título da tarefa" formControlName="descricao">
         </div>
       </div>
 
