@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.heitor.domain.Tarefa;
 import com.heitor.service.TarefaService;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/tarefa")
@@ -34,5 +35,10 @@ public class TarefaResources {
 	@GetMapping("/{id}")
 	public ResponseEntity<Tarefa> findById(@PathVariable(name = "id") Integer id){
 		return ResponseEntity.ok(service.findById(id));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<Tarefa>> findAll(){
+		return ResponseEntity.ok(service.findAll());
 	}
 }
