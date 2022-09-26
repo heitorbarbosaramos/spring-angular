@@ -26,15 +26,18 @@
         <ul class="list-group">
           <li *ngFor="let tarefa of listTarefa"
             class="list-group-item d-flex justify-content-between align-items-center">
-            {{tarefa.descricao}} {{tarefa.tarefaCriada}}
+            <span class="{{ tarefa.realizado ? 'feito' : '' }}">
+              {{tarefa.descricao}} {{tarefa.tarefaConcluida}}
+            </span>
 
             <div *ngIf="tarefa.id">
 
               <div class="btn-group" role="group" aria-label="Exemplo básico">
-                <button type="button" class="btn btn-primary"><img class="icon" src="./assets/icons/done.svg"
+                <button type="button" class="btn btn-primary" (click)="finalizarTarefa(tarefa)"
+                  [disabled]="tarefa.realizado"><img class="icon" src="./assets/icons/done.svg"
                     title="Finalizar" /></button>
-                <button type="button" class="btn btn-danger" (click)="delete(tarefa.id)"><img class="icon" src="./assets/icons/delete.svg"
-                    title="Excluir" /></button>
+                <button type="button" class="btn btn-danger" (click)="delete(tarefa.id)"><img class="icon"
+                    src="./assets/icons/delete.svg" title="Excluir" /></button>
               </div>
 
             </div>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,11 @@ public class TarefaResources {
 	public ResponseEntity<Void> save(@RequestBody @Valid Tarefa tarefa){
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(service.save(tarefa).getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@PutMapping
+	public ResponseEntity<Tarefa> update(@RequestBody @Valid Tarefa tarefa){
+		return ResponseEntity.ok(service.save(tarefa));
 	}
 	
 	@GetMapping("/{id}")

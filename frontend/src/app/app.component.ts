@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.listarTarefas();
   }
 
-  listarTarefas(){
+  listarTarefas() {
     return this.service.listar().subscribe(t => this.listTarefa = t);
   }
 
@@ -37,9 +37,18 @@ export class AppComponent implements OnInit {
     );
   }
 
-  delete(id : number){
-    this.service.delete(id).subscribe( {
-      next:(response) => this.listarTarefas()
+  finalizarTarefa(tarefa: Tarefa) {
+    tarefa.realizado = !tarefa.realizado;
+    this.service.update(tarefa).subscribe(
+      t => {
+        console.log("ATUALIZADO ", t);
+        this.listarTarefas();
+      })
+  }
+
+  delete(id: number) {
+    this.service.delete(id).subscribe({
+      next: (response) => this.listarTarefas()
     }
     )
   }
