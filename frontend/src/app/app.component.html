@@ -1,3 +1,22 @@
-<h1>{{title}}</h1>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand mb-0 h1" href="#">Tarefa App</a>
+</nav>
 
-<button class="btn btn-success">OK</button>
+<div class="container mt-4">
+    <h4>Tarefas</h4>
+    <hr />
+    <form class="form-inline" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputTarefa">Tarefa</label>
+                    <input type="email" id="inputTarefa" class="form-control" required>
+                    <small id="emailHelp" class="form-text text-muted">Aqui você pode adcionar suas tarefas.</small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary top">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
