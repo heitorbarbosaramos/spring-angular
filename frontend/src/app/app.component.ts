@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
 import { TarefaService } from 'src/service/tarefa.service';
 import { Tarefa } from './model/Tarefa';
@@ -8,19 +8,28 @@ import { Tarefa } from './model/Tarefa';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  
-  constructor(private service : TarefaService){}
+export class AppComponent implements OnInit {
 
-  form : FormGroup = new FormGroup({
-    descricao : new FormControl('')
+  constructor(private service: TarefaService) { }
+  
+
+  listTarefa : Tarefa[] = [];
+
+  ngOnInit(): void {
+    this.service.listar().subscribe(t => this.listTarefa = t);
+  }
+
+  form: FormGroup = new FormGroup({
+    descricao: new FormControl('')
   })
 
-  salvar(){
+  salvar() {
     console.log(this.form.value)
-    const tarefa : Tarefa = {...this.form.value };
-    this.service.salvar(tarefa).subscribe(
-      this.form.reset
+    const tarefa: Tarefa = { ...this.form.value };
+    this.service.salvar(tarefa).subscribe(t => {
+      this.listTarefa.push(tarefa);
+      this.form.reset()
+    }
     );
   }
 }
