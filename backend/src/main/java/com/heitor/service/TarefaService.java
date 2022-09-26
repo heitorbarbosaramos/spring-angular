@@ -1,5 +1,7 @@
 package com.heitor.service;
 
+import java.util.List;
+
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,9 @@ public class TarefaService {
 	public Tarefa findById(Integer id) {
 		Tarefa tarefa = repo.findById(id).orElseThrow(()-> new ObjectNotFoundException("Tarefa não encontrada: ", TarefaService.class.getName()));
 		return tarefa;
+	}
+	
+	public List<Tarefa> findAll(){
+		return repo.findAll();
 	}
 }
