@@ -19,4 +19,9 @@ export class TarefaService {
   listar() : Observable<Tarefa[]>{
     return this.http.get<Tarefa[]>(this.BASE_URL);
   }
+
+  delete(id : number) : Observable<void>{
+    const url = `${this.BASE_URL}/delete/${id}`
+    return this.http.delete<void>(url);
+  }
 }

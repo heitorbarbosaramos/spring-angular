@@ -31,4 +31,8 @@ public class TarefaService {
 	public List<Tarefa> findAll(){
 		return repo.findAll();
 	}
+	
+	public void delete(Integer id) {
+		repo.delete(findById(id));
+	}
 }

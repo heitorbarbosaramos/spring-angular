@@ -11,12 +11,16 @@ import { Tarefa } from './model/Tarefa';
 export class AppComponent implements OnInit {
 
   constructor(private service: TarefaService) { }
-  
 
-  listTarefa : Tarefa[] = [];
+
+  listTarefa: Tarefa[] = [];
 
   ngOnInit(): void {
-    this.service.listar().subscribe(t => this.listTarefa = t);
+    this.listarTarefas();
+  }
+
+  listarTarefas(){
+    return this.service.listar().subscribe(t => this.listTarefa = t);
   }
 
   form: FormGroup = new FormGroup({
@@ -31,5 +35,12 @@ export class AppComponent implements OnInit {
       this.form.reset()
     }
     );
+  }
+
+  delete(id : number){
+    this.service.delete(id).subscribe( {
+      next:(response) => this.listarTarefas()
+    }
+    )
   }
 }
