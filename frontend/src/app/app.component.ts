@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormBuilder ,FormControl, Validators } from '@angular/forms'
 import { TarefaService } from 'src/service/tarefa.service';
 import { Tarefa } from './model/Tarefa';
 
@@ -10,26 +10,54 @@ import { Tarefa } from './model/Tarefa';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private service: TarefaService) { }
+  constructor(private service: TarefaService, private formBuilder: FormBuilder) { }
+
+
+  listTarefa: Tarefa[] = [];
+  formulario!: FormGroup;
   
-
-  listTarefa : Tarefa[] = [];
-
   ngOnInit(): void {
-    this.service.listar().subscribe(t => this.listTarefa = t);
+
+    this.listarTarefas();
+    this.validaFormulario();
+       
   }
 
-  form: FormGroup = new FormGroup({
-    descricao: new FormControl('')
-  })
+  //https://www.alura.com.br/artigos/como-aplicar-validacao-formularios-reativos-angular
+  validaFormulario(){
+    this.formulario = this.formBuilder.group({
+      descricao: new FormControl('', [Validators.required, Validators.minLength(5)])
+    })
+  }
+
+  listarTarefas() {
+    return this.service.listar().subscribe(t => this.listTarefa = t);
+  }
+
 
   salvar() {
-    console.log(this.form.value)
-    const tarefa: Tarefa = { ...this.form.value };
+    console.log(this.formulario.value)
+    const tarefa: Tarefa = { ...this.formulario.value };
+    console.log(tarefa)
     this.service.salvar(tarefa).subscribe(t => {
       this.listTarefa.push(tarefa);
-      this.form.reset()
-    }
-    );
+      this.formulario.reset();
+    })
   }
+
+  finalizarTarefa(tarefa : Tarefa){
+    tarefa.realizado =!tarefa.realizado
+    this.service.update(tarefa).subscribe(t=>{
+      console.log("ATUALIZADO ", t)
+      this.listarTarefas();
+    })
+  }
+
+  delete(id: number){
+    this.service.delete(id).subscribe({
+      next:(response) => this.listarTarefas()
+    })
+  }
+ 
+
 }

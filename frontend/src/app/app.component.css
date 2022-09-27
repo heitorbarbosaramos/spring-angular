@@ -5,3 +5,11 @@
 .icon{
     max-width: 25px;
 }
+
+.feito{
+    text-decoration: line-through;
+}
+
+.alerta{
+    color: tomato;
+}

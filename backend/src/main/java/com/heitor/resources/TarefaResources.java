@@ -3,9 +3,11 @@ package com.heitor.resources;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,11 @@ public class TarefaResources {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PutMapping
+	public ResponseEntity<Tarefa> update(@RequestBody @Valid Tarefa tarefa){
+		return ResponseEntity.ok(service.save(tarefa));
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Tarefa> findById(@PathVariable(name = "id") Integer id){
 		return ResponseEntity.ok(service.findById(id));
@@ -40,5 +47,11 @@ public class TarefaResources {
 	@GetMapping
 	public ResponseEntity<List<Tarefa>> findAll(){
 		return ResponseEntity.ok(service.findAll());
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") Integer id){
+		service.delete(id);
+		return ResponseEntity.ok().build();
 	}
 }
