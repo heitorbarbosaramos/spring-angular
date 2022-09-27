@@ -5,7 +5,7 @@
 <div class="container">
   <h3 class="mt-5">Tarefas</h3>
   <hr />
-  <form [formGroup]="form" (ngSubmit)="salvar()">
+  <form [formGroup]="formulario" (ngSubmit)="salvar()">
     <div class="row">
 
 
@@ -15,10 +15,13 @@
           <input type="text" class="form-control" id="novaTarefa" placeholder="Título da tarefa"
             formControlName="descricao">
         </div>
-      </div>
 
+      <div class="alerta" *ngIf="formulario.get('descricao')?.errors && formulario.get('descricao')?.touched">
+          Campo obritório deve conter pelo menos 5 caracteres
+      </div>
+     
       <div class="col-md-2">
-        <button type="submit" class="btn btn-primary top">ADD</button>
+        <button type="submit" [disabled]="!formulario.valid" class="btn btn-primary top">ADD</button>
       </div>
 
       <div class="col-md-4 top">
@@ -30,24 +33,26 @@
               {{tarefa.descricao}} {{tarefa.tarefaConcluida}}
             </span>
 
+          
             <div *ngIf="tarefa.id">
 
               <div class="btn-group" role="group" aria-label="Exemplo básico">
-                <button type="button" class="btn btn-primary" (click)="finalizarTarefa(tarefa)"
-                  [disabled]="tarefa.realizado"><img class="icon" src="./assets/icons/done.svg"
+                <button type="button" class="btn btn-primary" 
+                  [disabled]="tarefa.realizado"><img class="icon" (click)="finalizarTarefa(tarefa)" src="./assets/icons/done.svg"
                     title="Finalizar" /></button>
-                <button type="button" class="btn btn-danger" (click)="delete(tarefa.id)"><img class="icon"
+                <button type="button" class="btn btn-danger" [disabled]="tarefa.realizado" (click)="delete(tarefa.id)"><img class="icon"
                     src="./assets/icons/delete.svg" title="Excluir" /></button>
               </div>
 
             </div>
-
+          
           </li>
 
         </ul>
       </div>
 
     </div>
-  </form>
+
+  
 
 </div>

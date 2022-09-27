@@ -9,3 +9,7 @@
 .feito{
     text-decoration: line-through;
 }
+
+.alerta{
+    color: tomato;
+}
